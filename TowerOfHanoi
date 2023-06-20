@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+class TowersOfHanoi{
+private:
+    int numMoves;
+
+public:
+    TowersOfHanoi() : numMoves(0) {}
+
+    void solve(int n, char source, char destination, char auxiliary)
+    {
+        if(n==1)
+        {
+            std::cout << "Move disk 1 from " << source << " to " << destination << std::endl;
+            numMoves++;
+        } else {
+             solve(n-1,source,auxiliary,destination);
+             std::cout << "Move disk " << n << " from "<< source << " to " << destination << std::endl;
+             numMoves++;
+             solve(n-1, auxiliary, destination, source);
+             }
+    }
+
+    int getNumMoves() const {
+        return numMoves;
+        }
+};
+
+int main() {
+    int numDisks;
+    std:cout << "Enter the number of disks: ";
+    std::cin >> numDisks;
+
+    TowersOfHanoi toh;
+    toh.solve(numDisks, 'A','C','B');
+
+    std::cout << "Total moves: " << toh.getNumMoves() << std::endl;
+    return 0;
+    }
